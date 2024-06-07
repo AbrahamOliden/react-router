@@ -1,4 +1,5 @@
 import { BrowserRouter as Router, Routes, Route} from 'react-router-dom';
+import Header from './components/Header.jsx';
 import Home from './routes/Home.jsx';
 import About from './routes/About.jsx';
 import Page404 from './routes/Page404.jsx';
@@ -10,6 +11,7 @@ function App() {
 
   return (
     <Router>
+      <Header />
       <Routes>
         <Route path='/' element={ <Home /> }/>
         <Route path='/about' element={ <About /> }/>
