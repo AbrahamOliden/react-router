@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { search } from '../api/api';
 import '../assets/css/componentes/card.css';
 
@@ -7,9 +7,13 @@ function Post({ url }) {
 
     const [post, setPost] = useState([]);
     const {id} = useParams();
+    const navigate = useNavigate();
 
     useEffect(() => {
-        search(`/posts/${id}`, setPost);
+        search(`/posts/${id}`, setPost)
+            .catch(() => {
+                navigate('/not-found');
+            });
     }, [id]);
 
     return (
