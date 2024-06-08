@@ -6,7 +6,14 @@ import ListPosts from "../components/ListPosts";
 import '../assets/css/blog.css';
 
 function Category() {
+    const [subCategories, setSubCategories] = useState([]);
     const { id } = useParams();
+
+    useEffect(() => {
+        search(`/categorias?id=${id}`,(response) => {
+            setSubCategories(response[0].subcategorias);
+        }); 
+    }, [id]);
     return (
         <>
             <div className="container">
