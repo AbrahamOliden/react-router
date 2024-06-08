@@ -12,17 +12,19 @@ function ListCategories() {
 
     return (
         <ul className="category-list container flex">
-            {
-            categories.map(category => {
+        {
+            categories.map(category => (
                 <Link to={`/category/${category.id}`} key={category.id} >
                     <li className={`category-list__category category-list__category--${category.id}`} >
                         {category.nombre}
                     </li>
                 </Link>
-            })
-            }
+            ))
+        }
         </ul>
     );
 };
 
 export default ListCategories;
+
+//       clase para <li>
