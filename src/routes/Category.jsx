@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { search } from "../api/api";
 import { useParams, Route, Routes, Link, useResolvedPath } from "react-router-dom";
 import ListCategories from "../components/ListCategories";
+import SubCategory from "./SubCategory";
 import ListPosts from "../components/ListPosts";
 import '../assets/css/blog.css';
 
@@ -13,7 +14,6 @@ function Category() {
     useEffect(() => {
         search(`/categorias?id=${id}`,(response) => {
             setSubCategories(response[0].subcategorias);
-            console.log(subCategories);
         }); 
         
     }, [id]);
@@ -25,8 +25,8 @@ function Category() {
             <ListCategories />
             <ul className="category-list container flex" >
                 {
-                subCategories.map((subcategory, index) => (
-                    <li className={`category-list__category category-list__category--${id}`} key={index} >
+                subCategories.map(subcategory => (
+                    <li className={`category-list__category category-list__category--${id}`} key={subcategory} >
                         <Link to={`${url}/${subcategory}`} >
                             {subcategory}
                         </Link></li>
@@ -36,6 +36,7 @@ function Category() {
             
             <Routes >
                 <Route path="/" element={<ListPosts url={`/posts?categoria=${id}`} />} />
+                <Route path="/:subcategoria" element={<SubCategory/>} />
             </Routes>
         </>
     )
